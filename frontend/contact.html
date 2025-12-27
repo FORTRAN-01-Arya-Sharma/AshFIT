@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Ashgrtz Fitness</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="fade-out">
+    <!-- 1. Navigation Bar (Stays the same across all pages) -->
+    <header class="navbar">
+      <div class="container">
+        <!-- Item 1: Logo -->
+        <a href="index.html" class="brand-logo">
+          <img src="images/logo.png" alt="Ashgrtz Logo" />
+          <span>Ashgrtz</span>
+        </a>
+
+        <!-- Item 2: Main Navigation (Center Links for Desktop, All Links for Mobile Panel) -->
+        <nav id="main-nav">
+          <ul>
+            <!-- Desktop Center Links -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <!-- Mobile-Only Action Links -->
+            <li class="nav-action-item-mobile"><a href="cart.html">Cart</a></li>
+
+            <!-- THIS IS THE FIX: Added id="mobile-login-button" -->
+            <li class="nav-action-item-mobile" id="mobile-login-button">
+              <a href="login.html" class="btn-login">Login</a>
+            </li>
+
+            <!-- THIS IS THE FIX: Added id="mobile-user-profile" -->
+            <li
+              class="nav-action-item-mobile"
+              id="mobile-user-profile"
+              style="display: none"
+            >
+              <div class="mobile-profile-container">
+                <!-- THIS IS THE FIX: Added id="mobile-profile-pic-display" -->
+                <div class="profile-pic" id="mobile-profile-pic-display"></div>
+                <!-- THIS IS THE FIX: Added id="mobile-logout-button" -->
+                <a href="#" id="mobile-logout-button">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Item 3: Desktop Actions & Hamburger Menu Container -->
+        <div class="right-nav-container">
+          <!-- Desktop-Only Action Links -->
+          <div class="nav-actions" id="desktop-actions">
+            <a href="cart.html" id="cart-link">Cart</a>
+            <a href="login.html" class="btn-login" id="login-button">Login</a>
+            <div id="user-profile" style="display: none">
+              <a href="#" id="logout-button">Logout</a>
+              <a href="account.html" class="profile-pic-link">
+    <div class="profile-pic" id="profile-pic-display"></div>
+</a>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/png, image/jpeg"
+                style="display: none"
+              />
+            </div>
+          </div>
+
+          <!-- Mobile-Only Hamburger Icon -->
+          <div class="hamburger-menu" id="hamburger-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- 2. Main Content for the Contact Page -->
+    <main class="contact-page">
+      <!-- Hero Section for the Contact Page -->
+
+      <section class="contact-hero">
+        <!-- The new video background element -->
+        <video playsinline autoplay loop muted class="hero-background-video">
+          <source src="videos/hero-video-3.mp4" type="video/mp4" />
+        </video>
+
+        <!-- The content container -->
+        <div class="container">
+          <h1>Get In Touch</h1>
+          <p>We're Here to Help. Let's Connect.</p>
+        </div>
+      </section>
+
+      <!-- Main Content Area (Two-column layout) -->
+      <section class="contact-content">
+        <div class="container contact-grid">
+          <!-- Left Side: Contact Form -->
+          <div class="contact-form-container">
+            <h2>Send Us A Message</h2>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Submit Form</button>
+            </form>
+          </div>
+
+          <!-- Right Side: Contact Information -->
+          <div class="contact-info-container">
+            <h2>Contact Information</h2>
+            <p>
+              Have a question about your order, our products, or a
+              collaboration? We’d love to hear from you.
+            </p>
+
+            <div class="info-item">
+              <h3>Email Us</h3>
+              <p>
+                <a
+                  href="mailto:support@ashgrtz.com?subject=Question About Ashgrtz Fitness"
+                >
+                  support@ashgrtz.com
+                </a>
+              </p>
+            </div>
+
+            <div class="info-item">
+              <h3>Business Hours</h3>
+              <p>Monday - Friday: 9:00 AM - 5:00 PM EST</p>
+            </div>
+
+            <div class="info-item">
+              <h3>Follow Us</h3>
+              <!-- Replace '#' with your actual social media links -->
+              <div class="social-links">
+                <div class="social-links">
+                  <a href="https://www.instagram.com/ashgrtz" target="_blank"
+                    >Instagram</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 3. Footer (Stays the same across all pages) -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Ashgrtz Fitness. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link to JavaScript file for the hamburger menu -->
+    <script src="js/main.js"></script>
+    <script src="js/auth-status.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/transition.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - View Orders</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- This script MUST be in the head to protect the page -->
+    <script src="js/admin-guard.js"></script>
+</head>
+<body class="fade-out">
+    <header class="navbar">
+        <!-- (Paste your final, correct header code here) -->
+    </header>
+
+    <main class="admin-page">
+        <div class="container">
+            <h1>View Customer Orders</h1>
+            <p>A list of all orders placed in the store, sorted by most recent.</p>
+
+            <div class="table-container">
+                <table id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Shipping To</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <!-- Orders will be loaded here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!-- (Paste your final, correct footer code here) -->
+    </footer>
+    
+    <script src="js/transition.js"></script>
+    <script src="js/auth-status.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/admin-orders.js"></script> <!-- We will create this next -->
+</body>
+</html>```
+

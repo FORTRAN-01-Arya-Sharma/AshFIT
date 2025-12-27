@@ -1,0 +1,1938 @@
+/* --- 1. Global Styles & Variables --- */
+:root {
+  --primary-color: #121212;
+  --secondary-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --accent-color: #00ff99; /* Neon Green for main theme */
+  --accent-glow: rgba(0, 255, 153, 0.4);
+  --icon-color: #ff003b; /* Vibrant Red for icon only */
+  --icon-glow: rgba(255, 0, 59, 0.5);
+  --font-family: "Poppins", sans-serif;
+  --transition-speed: 0.3s;
+}
+
+/* --- Base Setup --- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* --- 2. Navigation Bar --- */
+.navbar {
+  background-color: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-logo {
+  display: flex; /* This is the key to aligning items side-by-side */
+  align-items: center; /* This vertically centers the logo with the text */
+  gap: 12px; /* This creates a nice space between the logo and text */
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.brand-logo img {
+  height: 70px; /* IMPORTANT: Adjust this value to make your logo bigger or smaller */
+}
+
+/* Make the text, not the image, change color on hover */
+.brand-logo span {
+  transition: color var(--transition-speed) ease;
+}
+
+.brand-logo:hover span {
+  color: var(--accent-color);
+}
+
+.navbar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar nav a {
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--transition-speed) ease;
+}
+
+.navbar nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-color);
+  transition: width var(--transition-speed) ease;
+}
+
+.navbar nav a:hover {
+  color: var(--accent-color);
+}
+
+.navbar nav a:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-actions a {
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-actions a:hover {
+  color: var(--accent-color);
+}
+
+.nav-actions .btn-login {
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+}
+
+.nav-actions .btn-login:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+/* --- 3. Hero Section --- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 80px 20px 0;
+  position: relative; /* This is crucial for positioning the video */
+  overflow: hidden; /* Hides parts of the video that go off-screen */
+  box-sizing: border-box;
+}
+
+/* We need to add an overlay so the text is readable over the video */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  z-index: 1;
+}
+
+/* We also need to bring the content above the overlay */
+.hero-content,
+.animated-icon {
+  position: relative;
+  z-index: 2;
+}
+
+.subtitle-wrapper {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+#bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0; /* Places the video behind the overlay and content */
+  object-fit: cover; /* Ensures the video covers the screen without distortion */
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+  /* Typing Effect Styles */
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap; /* Forces text to one line for the animation */
+  border-right: 0.15em solid var(--accent-color);
+  letter-spacing: 0.1em;
+  width: 0;
+
+  /* Original looping animation */
+  animation: type-and-erase 8s steps(44, end) infinite,
+    blink-caret 0.75s step-end infinite;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  transition: all var(--transition-speed) ease-in-out;
+  animation: fadeInUp 1s ease-out 1s;
+  animation-fill-mode: backwards;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  transform: scale(1.05) translateY(-3px);
+  cursor: pointer;
+  box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+/* --- 4. Collections Section --- */
+.collections {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.collections h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 50px;
+  position: relative;
+  display: inline-block;
+}
+
+.collections h2::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 3px;
+  bottom: -10px;
+  left: 20%;
+  background-color: var(--accent-color);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.category-card {
+  position: relative;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+  border: 1px solid var(--secondary-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 20px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  text-align: center;
+}
+
+.card-overlay h3 {
+  margin: 0;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 700;
+  transition: color var(--transition-speed) ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.category-card:hover img {
+  transform: scale(1.05);
+}
+
+.category-card:hover .card-overlay h3 {
+  color: var(--accent-color);
+}
+
+/* --- 5. Footer --- */
+.footer {
+  background-color: #000;
+  text-align: center;
+  padding: 40px 0;
+  margin-top: 60px;
+  border-top: 1px solid var(--secondary-color);
+}
+
+/* --- 8. Shop Page & Product Cards (NEW STYLES) --- */
+
+.shop-page {
+  padding-top: 120px; /* Offset for the fixed navbar */
+  padding-bottom: 60px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 50px;
+}
+
+/* This re-uses the grid style from the homepage collections */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: all var(--transition-speed) ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-color);
+}
+
+.product-card img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  margin: 0 0 20px;
+}
+
+/* ADD THIS NEW CSS for the new modal features */
+
+/* Container for all the controls */
+.product-controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.control-group select,
+.control-group input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+/* Style for the disabled color option */
+.control-group select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-group input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+
+.size-chart-link {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-add-to-cart {
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none; /* Make sure buttons have no default border */
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #fff;
+}
+
+/* --- 9. Hamburger Menu & Responsive Navigation --- */
+
+/* Style for the hamburger icon itself */
+.hamburger-menu {
+  display: none; /* Hidden by default on desktop */
+  cursor: pointer;
+}
+
+.hamburger-menu .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: var(--text-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-action-item-mobile {
+  display: none !important;
+}
+
+/* --- 10. Product Detail Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Ensure it's on top of everything */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: var(--secondary-color);
+    padding: 40px;
+    border-radius: 10px;
+    position: relative;
+    width: 90%; /* Use percentage for better responsiveness */
+    max-width: 900px;
+    
+    /* --- THIS IS THE FIX --- */
+    max-height: 90vh; /* Set a maximum height (90% of viewport height) */
+    display: flex;    /* Use flexbox for the inner layout */
+    flex-direction: column;
+}
+
+/* A simple animation for when the modal appears */
+.modal-overlay.active {
+  opacity: 1;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* Reuse the product detail layout styles from before */
+#modal-product-detail .product-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: flex-start;
+    
+    /* --- THIS IS THE FIX --- */
+    overflow-y: auto; /* Allow this container to scroll if content is too long */
+    padding-right: 15px; /* Add some padding for the scrollbar */
+}
+
+#modal-product-detail img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+#modal-product-detail h1 {
+  font-size: 2.2rem;
+  margin: 0 0 15px;
+}
+#modal-product-detail .price {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+#modal-product-detail .description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+#modal-product-detail .size-selector {
+  margin-bottom: 25px;
+}
+#modal-product-detail .size-selector label {
+  font-weight: 600;
+  margin-right: 15px;
+}
+#modal-product-detail .size-selector select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+/* --- The Media Query for Mobile Devices --- */
+/* --- 9. Responsive Design & Hamburger Menu --- */
+/* (This is the complete and final version for mobile) */
+
+@media (max-width: 992px) {
+  /* --- Main Navigation Panel (Slide-out) --- */
+
+  /* FIX: By default on mobile, completely hide the nav panel from the layout */
+  .navbar nav {
+    display: none;
+  }
+  .about-grid,
+  .contact-grid,
+  .cart-layout,
+  .checkout-layout,
+  .account-layout {
+    grid-template-columns: 1fr; /* Stack the columns vertically */
+  }
+
+  
+
+.cart-item {
+    /* Change the grid layout for very small screens */
+    grid-template-columns: 80px 1fr; /* Image on top, info below */
+    grid-template-areas: 
+        "img info"
+        "img quantity"
+        "img price";
+    gap: 10px 20px;
+    align-items: center;
+}
+
+.cart-item-img { grid-area: img; }
+.cart-item-info { grid-area: info; }
+.cart-item-quantity { grid-area: quantity; justify-self: start; }
+.cart-item-price { grid-area: price; justify-self: end; font-size: 1.2rem; }
+
+  /* FIX: When active, bring it back as a full-screen flex container */
+  .navbar nav.nav-active {
+    display: flex; /* This makes it visible and functional */
+    position: fixed;
+    top: 75px;
+    right: 0;
+    width: 100%;
+    height: calc(100vh - 75px);
+    background-color: var(--primary-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    /* Animation can be added back if needed, but display is more robust */
+  }
+
+  /* All the styles for the links inside the panel remain the same */
+  .navbar nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar nav li {
+    margin: 20px 0;
+  }
+
+  .navbar nav a {
+    font-size: 1.5rem;
+  }
+
+  /* --- Hamburger Icon --- */
+  .hamburger-menu {
+    display: block;
+    order: 3;
+  }
+
+  .hamburger-menu.toggle-active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger-menu.toggle-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.toggle-active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  /* --- Link Visibility --- */
+  .nav-actions {
+    display: none !important;
+  }
+
+  /* --- Mobile Profile & Login Styles --- */
+  .navbar nav .btn-login {
+    display: inline-block;
+    padding: 15px 40px;
+    margin-top: 15px;
+  }
+
+  .mobile-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  #mobile-logout-button {
+    color: var(--icon-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  /* --- General Page Layouts for Tablet --- */
+  .about-grid,
+  .contact-grid,
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+ 
+
+.account-nav {
+    flex-direction: row; /* Change from a vertical list to a horizontal one */
+    justify-content: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+}
+
+.account-nav a {
+    border-left: none; /* Remove the side border */
+    border-bottom: 3px solid transparent; /* Add a bottom border for the active state */
+}
+
+.account-nav a.active {
+    border-bottom-color: var(--accent-color);
+}
+
+#account-logout-btn {
+    margin-top: 0; /* Remove the top margin */
+}
+}
+
+/* --- 7. Keyframe Animations --- */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes type-and-erase {
+  0%,
+  100% {
+    width: 0;
+  }
+  50%,
+  90% {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent-color);
+  }
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- 8. Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+  /* Mobile Layouts */
+  .category-grid,
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    height: 400px;
+  }
+
+  #modal-product-detail .product-detail-layout {
+    grid-template-columns: 1fr;
+    overflow-y: visible; /* Let the whole modal scroll on mobile */
+    padding-right: 0;
+}
+.modal-content {
+    overflow-y: auto; /* Enable scrolling on the main modal content for mobile */
+    padding: 20px;
+
+  }
+  /* Font Size Adjustments for Mobile */
+  .about-hero h1,
+  .contact-hero h1,
+  .about-text h2,
+  .core-values h2,
+  .cta-section h2,
+  .page-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem; /* Slightly reduce the main title size for very narrow screens */
+  }
+
+  .subtitle-wrapper {
+    height: auto; /* Allow the wrapper to grow if the text wraps to two lines */
+    min-height: 60px; /* Give it a minimum height to prevent layout shifts */
+  }
+
+  .subtitle {
+    white-space: normal; /* THIS IS THE FIX: Allows the text to wrap */
+    border-right: none; /* Hide the blinking cursor on mobile */
+    animation: none; /* Disable the typing animation on mobile */
+    width: auto; /* Let the text take its natural width */
+    text-align: center;
+  }
+
+  .profile-header {
+    flex-direction: column; /* Stack the picture on top of the name/email */
+    text-align: center;
+}
+}
+
+/* --- 11. About Page Styles --- */
+
+.about-page {
+  padding-top: 75px; /* Offset for the fixed navbar */
+}
+
+/* Hero section for the about page */
+/* ADD THESE new styles for the video background */
+
+/* This makes the hero a container for the video */
+.about-hero {
+  position: relative; /* Essential for positioning the video and overlay */
+  overflow: hidden; /* Hides parts of the video that go off-screen */
+  text-align: center;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh; /* Give it a decent height */
+}
+
+/* This is the dark overlay to ensure text is readable */
+.about-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+/* Bring the text content above the overlay */
+.about-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Style for the video element itself --- */
+/* We can reuse this for any hero section video */
+.hero-background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0; /* Places it behind everything */
+  object-fit: cover;
+}
+
+.about-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  /* Add this line for a smooth animation */
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.about-hero h1:hover {
+  cursor: pointer; /* Changes the mouse to a pointer on hover */
+  transform: scale(1.05); /* Makes it "pop" by 5% */
+  color: #ff0040; /* A deep "blood red" color */
+  /* This creates the red glow effect */
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.89);
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  /* Add this line for a smooth animation */
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.about-hero p:hover {
+  cursor: pointer;
+  transform: scale(1.05); /* Makes it "pop" by 5% */
+  color: #ffffff; /* Changes the color to white */
+  /* Optional: Add a subtle white glow */
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* "Our Story" two-column section */
+.about-content {
+  padding: 80px 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Image column is smaller */
+  gap: 50px;
+  align-items: center;
+}
+
+#about-logo {
+  width: 100%;
+  padding-top: 100%;
+  background-image: url("../images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+#about-logo:hover {
+  transform: scale(1.45);
+  filter: drop-shadow(0 0 15px var(--icon-color));
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+/* "Core Values" three-column section */
+.core-values {
+  background-color: var(--primary-color);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.core-values h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.value-card {
+  background-color: var(--secondary-color);
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all var(--transition-speed) ease;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-color);
+}
+
+.value-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+/* Call to Action section */
+.cta-section {
+  background-color: var(--secondary-color);
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+/* Add responsiveness for the new sections */
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr; /* Stack columns on tablets */
+  }
+  .nav-action-item-mobile {
+    display: list-item !important;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .values-grid {
+    grid-template-columns: 1fr; /* Stack columns on mobile */
+  }
+
+  .about-hero h1,
+  .about-text h2,
+  .core-values h2,
+  .cta-section h2 {
+    font-size: 2rem; /* Adjust font sizes for smaller screens */
+  }
+}
+
+/* --- 12. Contact Page Styles --- */
+
+.contact-page {
+  padding-top: 75px; /* Offset for the fixed navbar */
+}
+
+/* Hero section for the contact page */
+/* ADD THESE NEW, ENHANCED RULES */
+
+/* This makes the hero a container for the video */
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+/* Dark overlay for text readability */
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+/* Bring the text content above the overlay */
+.contact-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Style and transition for the main title */
+.contact-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* HOVER EFFECT for the main title (Pop + Blood Red) */
+.contact-hero h1:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  color: #f8f8f8; /* Blood red */
+  text-shadow: 0 0 20px rgb(255, 0, 0);
+}
+
+/* Style and transition for the subtitle */
+.contact-hero p {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* HOVER EFFECT for the subtitle (Pop + White) */
+.contact-hero p:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  color: #ffffff; /* White */
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Main two-column layout */
+.contact-content {
+  padding: 80px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* Form column is wider */
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.contact-form-container h2,
+.contact-info-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  background-color: var(--secondary-color);
+  border: 1px solid #333;
+  border-radius: 5px;
+  color: var(--text-color);
+  box-sizing: border-box; /* Important for padding and width */
+  transition: border-color var(--transition-speed) ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.form-group textarea {
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Contact Info Styles */
+.contact-info-container p {
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.info-item h3 {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.info-item a {
+  color: var(--text-color);
+  transition: color var(--transition-speed) ease;
+}
+
+.info-item a:hover {
+  color: var(--accent-color);
+}
+
+.social-links a {
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr; /* Stack columns on tablets and mobile */
+  }
+  .order-summary-container {
+    position: static; /* Disables the 'sticky' behavior on mobile */
+    margin-top: 40px; /* Add some space above it when it stacks */
+}
+}
+
+/* --- 13. Authentication Page Styles (Login & Register) --- */
+
+/* ADD THIS NEW RULE for the container */
+.auth-page {
+    /* We make the parent a positioning context */
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ADD THIS NEW RULE for the form box */
+.auth-container {
+    /* This is the classic centering trick */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* We still control the size */
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-form-container {
+  background-color: var(--secondary-color);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.auth-form-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.auth-form-container p {
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+#register-form,
+#login-form {
+  text-align: left; /* Align form elements to the left */
+}
+
+/* We can reuse the .form-group styles from the contact page */
+
+.auth-switch {
+  margin-top: 30px;
+  font-size: 0.9rem;
+}
+.text-center {
+    text-align: center;
+}
+
+.auth-switch a {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Styles for the success/error message box */
+.form-message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Hidden by default */
+}
+
+.form-message.success {
+  background-color: rgba(0, 255, 153, 0.1);
+  color: var(--accent-color);
+  display: block;
+}
+
+.form-message.error {
+  background-color: rgba(255, 0, 59, 0.1);
+  color: var(--icon-color);
+  display: block;
+}
+
+/* --- 14. Cart Page Styles --- */
+
+.cart-page {
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
+
+.cart-page h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 50px;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Items column is twice as wide as summary */
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Styles for the items on the left */
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto; /* Image, Info, Quantity, Price */
+  gap: 20px;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.cart-item-img img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.cart-item-info h3 {
+  margin: 0 0 5px;
+  font-size: 1.1rem;
+}
+
+.cart-item-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.cart-item-quantity input {
+  width: 50px;
+  padding: 8px;
+  text-align: center;
+  background-color: #333;
+  border: 1px solid #444;
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+.cart-item-price {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.remove-item-btn {
+  font-size: 0.8rem;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: color var(--transition-speed) ease;
+}
+.remove-item-btn:hover {
+  color: var(--icon-color);
+}
+
+/* Styles for the summary on the right */
+.cart-summary-container {
+  background-color: var(--secondary-color);
+  padding: 30px;
+  border-radius: 10px;
+  position: sticky; /* Keeps it in place on scroll */
+  top: 120px;
+}
+
+.cart-summary-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.summary-row.total-row {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ADD THIS CSS for the size chart modal */
+
+.size-chart-content {
+  max-width: 600px; /* Make this modal a bit smaller */
+  text-align: center;
+}
+
+.size-chart-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.size-chart-content img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* ADD THIS NEW CSS for the user profile */
+
+#user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#logout-button {
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color var(--transition-speed) ease;
+}
+
+#logout-button:hover {
+  color: var(--icon-color); /* Red for logout */
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* This makes it a circle */
+  background-color: var(--secondary-color);
+  border: 2px solid var(--accent-color);
+  /* For now, we use a generic icon. You can replace this with an actual image. */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2300ff99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*  coupon section */
+
+.coupon-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.coupon-container input {
+  flex-grow: 1; /* Allows the input to take up available space */
+  padding: 12px;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  background-color: #333;
+  border: 1px solid #444;
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+.coupon-container button {
+  padding: 0 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.coupon-container button:hover {
+  background-color: #fff;
+}
+
+/* Style for the new discount row */
+.discount-row {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .cart-layout {
+        grid-template-columns: 1fr;
+    }
+}
+/* ADD THIS for the page transition effect */
+
+main {
+    /* The default, visible state */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* The state for when the page is fading in or out */
+body.fade-out main {
+    opacity: 0;
+    transform: translateY(20px); /* Content will slide up from 20px below */
+}
+
+
+/* ADD THIS to the Checkout Page Styles section */
+
+.checkout-steps {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #444;
+}
+
+.step {
+    padding: 15px 0;
+    font-weight: 500;
+    color: #888;
+    position: relative;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.step.active {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.step.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+/* --- 17. Order Confirmation Page --- */
+.confirmation-page { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.confirmation-box { background-color: var(--secondary-color); padding: 50px; border-radius: 10px; text-align: center; max-width: 600px; }
+.confirmation-box h1 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
+.confirmation-box p { line-height: 1.7; }
+.confirmation-box .order-details { text-align: left; margin-top: 30px; border-top: 1px solid #444; padding-top: 30px; }
+.confirmation-box .order-details h4 { font-size: 1.2rem; margin-bottom: 10px; }
+
+/* ADD THIS for form validation */
+
+.form-group .error-message {
+    color: var(--icon-color); /* Red */
+    font-size: 0.8rem;
+    display: none; /* Hidden by default */
+    margin-top: 5px;
+}
+
+.form-group input.invalid {
+    border-color: var(--icon-color);
+}
+
+.form-group input.valid {
+    border-color: var(--accent-color); /* Green */
+}
+
+/* --- 18. Admin Panel Styles --- */
+
+/* --- 18. Admin Panel Styles (NEW & IMPROVED) --- */
+
+.admin-page {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    background-color: var(--primary-color); /* Ensure a consistent background */
+}
+
+.admin-page h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.admin-page p {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+    color: #aaa;
+}
+
+/* Dashboard Navigation Links */
+.admin-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px 0;
+}
+
+.admin-nav a {
+    padding: 20px 40px; /* Make buttons larger */
+}
+
+/* Table container for responsiveness */
+.table-container {
+    overflow-x: auto;
+    margin-top: 40px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* General table styles */
+#products-table,
+#orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-color);
+}
+
+#products-table th, #orders-table th,
+#products-table td, #orders-table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+#products-table tr:last-child td,
+#orders-table tr:last-child td {
+    border-bottom: none; /* Remove border on the last row */
+}
+
+#products-table thead,
+#orders-table thead {
+    background: none;
+}
+
+#products-table th,
+#orders-table th {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #aaa;
+}
+
+/* Action buttons inside the table */
+.edit-btn, .delete-btn {
+    padding: 8px 15px; /* Slightly larger buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-right: 10px;
+}
+
+.edit-btn {
+    background-color: #444;
+    color: #fff;
+}
+.edit-btn:hover {
+    background-color: #5a5a5a;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background-color: var(--icon-color);
+    color: #fff;
+}
+.delete-btn:hover {
+    background-color: #ff3c6a;
+    transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE STYLES for Admin Panel --- */
+@media (max-width: 768px) {
+    .admin-page h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Hide the table header on mobile */
+    #products-table thead,
+    #orders-table thead {
+        display: none;
+    }
+
+    /* Make table rows behave like cards */
+    #products-table tr,
+    #orders-table tr {
+        display: block;
+        border: 1px solid var(--secondary-color);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background-color: var(--secondary-color);
+    }
+    
+    #products-table td,
+    #orders-table td {
+        display: flex;
+        justify-content: space-between; /* Align label and value */
+        align-items: center;
+        border-bottom: 1px solid #333;
+        padding: 15px;
+    }
+    
+    #products-table td:last-child,
+    #orders-table td:last-child {
+        border-bottom: none;
+    }
+
+    /* Add the column title as a label before the content */
+    #products-table td::before,
+    #orders-table td::before {
+        content: attr(data-label); /* Use the data-label attribute we will add */
+        font-weight: 600;
+        color: #aaa;
+        margin-right: 20px;
+    }
+
+    /* Center the action buttons on mobile */
+    #products-table td[data-label="Actions"] {
+        justify-content: center;
+    }
+}
+
+/* ADD THIS NEW CSS for the admin dashboard branding */
+
+.admin-branding {
+    max-width: 300px; /* Control the max size of the logo */
+    margin: 60px auto; /* Center the container and add space */
+    text-align: center;
+}
+
+#admin-logo {
+    width: 100%;
+    padding-top: 100%; 
+    background-image: url('../images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all var(--transition-speed) ease-in-out;
+    cursor: pointer;
+}
+
+#admin-logo:hover {
+    transform: scale(1.50);
+    filter: drop-shadow(0 0 20px var(--icon-color)); /* The red glow */
+}
+
+.admin-tagline {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #ffffff;
+    
+    /* --- THE DEMONIC FONT --- */
+    font-family: 'Metal Mania', cursive;
+    font-size: 5rem; /* Make it BIG */
+    color: var(--text-color); /* A brighter white */
+    text-transform: uppercase; /* Make it all caps */
+    letter-spacing: 2px; /* Add some space between letters */
+    
+    /* --- The subtle red shadow for a demonic glow --- */
+    text-shadow: 0 0 10px var(--icon-glow);
+}
+
+/* --- 19. Product Reviews Styles --- */
+.reviews-section { 
+  margin-top: 40px;
+ }
+.reviews-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.review {
+  border-bottom: 1px solid #444;
+  padding: 20px 0;
+}
+.review:last-child {
+  border-bottom: none;
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.review-user {
+  font-weight: 600;
+}
+.review-rating span {
+  color: #ffd700;
+} /* Gold color for stars */
+.review-text {
+  color: #ccc;
+  line-height: 1.6;
+}
+.review-form {
+  margin-top: 20px;
+}
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.star-rating input {
+  display: none;
+}
+.star-rating label {
+  font-size: 2rem;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffd700;
+}
+
+/* ADD THIS to the Admin Panel Styles section */
+
+.admin-section {
+    margin-top: 60px;
+}
+
+.admin-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+/* ADD THIS to the admin panel styles */
+
+.order-status-select {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #333;
+    color: var(--text-color);
+    border: 1px solid #555;
+    font-weight: 500;
+}
+
+
+
+/* Allow long text to wrap instead of overflowing */
+#messages-table td,
+#orders-table td,
+#reviews-table td {
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* Give the 'Message' column more space */
+#messages-table th:nth-child(4),
+#messages-table td:nth-child(4) {
+    width: 40%; 
+}
+
+/* Give the 'Review' column more space */
+#reviews-table th:nth-child(5),
+#reviews-table td:nth-child(5) {
+    width: 30%;
+}
+
+/* Give the 'Shipping To' column more space */
+#orders-table th:nth-child(4),
+#orders-table td:nth-child(4) {
+    width: 30%;
+}
+
+/* REPLACE the previous table styles with this new block */
+
+/* This makes the table obey the column widths we set */
+#messages-table,
+#reviews-table,
+#orders-table {
+    table-layout: fixed;
+    width: 100%; /* Ensure table takes full width of its container */
+}
+
+/* Allow long text (like emails and messages) to wrap */
+#messages-table td,
+#orders-table td,
+#reviews-table td {
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* --- Specific Column Widths --- */
+
+/* Contact Messages Table */
+#messages-table th:nth-of-type(1), #messages-table td:nth-of-type(1) { width: 18%; } /* Date */
+#messages-table th:nth-of-type(2), #messages-table td:nth-of-type(2) { width: 12%; } /* From */
+#messages-table th:nth-of-type(3), #messages-table td:nth-of-type(3) { width: 20%; } /* Email */
+#messages-table th:nth-of-type(4), #messages-table td:nth-of-type(4) { width: 40%; } /* Message */
+#messages-table th:nth-of-type(5), #messages-table td:nth-of-type(5) { width: 10%; } /* Actions */
+
+/* Product Reviews Table */
+#reviews-table th:nth-of-type(1), #reviews-table td:nth-of-type(1) { width: 10%; } /* Date */
+#reviews-table th:nth-of-type(2), #reviews-table td:nth-of-type(2) { width: 15%; } /* User */
+#reviews-table th:nth-of-type(3), #reviews-table td:nth-of-type(3) { width: 20%; } /* Product */
+#reviews-table th:nth-of-type(4), #reviews-table td:nth-of-type(4) { width: 15%; } /* Rating */
+#reviews-table th:nth-of-type(5), #reviews-table td:nth-of-type(5) { width: 30%; } /* Review */
+#reviews-table th:nth-of-type(6), #reviews-table td:nth-of-type(6) { width: 10%; } /* Actions */
+
+
+/* ADD THIS NEW CSS for the collection switch button */
+
+.collection-switch {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    font-weight: 500;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* --- 19. My Account Page Styles --- */
+.account-page { padding-top: 120px; padding-bottom: 60px; }
+.account-page h1 { text-align: center; font-size: 3rem; margin-bottom: 50px; }
+.account-layout { display: grid; grid-template-columns: 1fr 3fr; gap: 40px; }
+.account-nav { display: flex; flex-direction: column; gap: 10px; }
+.account-nav a { padding: 15px; border-radius: 5px; font-weight: 500; transition: all 0.2s ease; border-left: 3px solid transparent; }
+.account-nav a:hover { background-color: var(--secondary-color); }
+.account-nav a.active { background-color: var(--secondary-color); border-left-color: var(--accent-color); }
+#account-logout-btn { color: var(--icon-color); margin-top: 20px; }
+.account-content { background-color: var(--secondary-color); padding: 40px; border-radius: 10px; }
+.profile-header { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; }
+.profile-pic-large { width: 120px; height: 120px; /* ... copy styles from .profile-pic ... */ }
+.profile-info h2 { font-size: 2rem; margin: 0; }
+.profile-details p { line-height: 1.8; }
+.profile-details strong { color: #aaa; margin-right: 10px; }
+
+/* ADD THIS to your account page styles */
+
+.profile-pic-large {
+    position: relative; /* Needed for the overlay */
+    cursor: pointer;
+    border: 3px solid var(--secondary-color); /* Add a border */
+    transition: border-color var(--transition-speed) ease;
+}
+
+.profile-pic-large:hover {
+    border-color: var(--accent-color); /* Highlight border on hover */
+}
+
+.edit-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0; /* Hidden by default */
+    transition: opacity var(--transition-speed) ease;
+}
+
+.profile-pic-large:hover .edit-overlay {
+    opacity: 1; /* Show on hover */
+}

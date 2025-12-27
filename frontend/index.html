@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashgrtz Fitness - Train Hard. Look Sharp.</title>
+
+    <!-- GOOGLE FONTS (ADD THESE LINES) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="fade-out">
+    <!-- 1. Navigation Bar -->
+    <header class="navbar">
+      <div class="container">
+        <!-- Item 1: Logo (Stays on the Left) -->
+        <a href="index.html" class="brand-logo">
+          <img src="images/logo.png" alt="Ashgrtz Logo" />
+          <span>Ashgrtz</span>
+        </a>
+
+        <!-- Item 2: Main Navigation (Center Links for Desktop, All Links for Mobile Panel) -->
+        <nav id="main-nav">
+          <ul>
+            <!-- These links appear in the center on desktop -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <!-- These links ONLY appear in the mobile slide-out menu -->
+            <li class="nav-action-item-mobile"><a href="cart.html">Cart</a></li>
+            <li class="nav-action-item-mobile" id="mobile-login-button">
+              <a href="login.html" class="btn-login">Login</a>
+            </li>
+            <li
+              class="nav-action-item-mobile"
+              id="mobile-user-profile"
+              style="display: none"
+            >
+              <div class="mobile-profile-container">
+                <div class="profile-pic" id="mobile-profile-pic-display"></div>
+                <a href="#" id="mobile-logout-button">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Item 3: Desktop Actions & Hamburger Menu Container -->
+        <div class="right-nav-container">
+          <!-- Desktop-Only Action Links -->
+          <div class="nav-actions" id="desktop-actions">
+            <a href="cart.html" id="cart-link">Cart</a>
+            <a href="login.html" class="btn-login" id="login-button">Login</a>
+            <div id="user-profile" style="display: none">
+              <a href="#" id="logout-button">Logout</a>
+              <a href="account.html" class="profile-pic-link">
+                <div class="profile-pic" id="profile-pic-display"></div>
+              </a>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/png, image/jpeg"
+                style="display: none"
+              />
+            </div>
+          </div>
+
+          <!-- Mobile-Only Hamburger Icon -->
+          <div class="hamburger-menu" id="hamburger-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 2. Hero Section -->
+      <section class="hero">
+        <video playsinline autoplay loop muted id="bg-video">
+          <source src="videos/hero-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="hero-content">
+          <h1>Train Hard. Look Sharp.</h1>
+          <!-- This wrapper div fixes the centering issue -->
+          <div class="subtitle-wrapper">
+            <p class="subtitle">
+              Premium fitness apparel designed for peak performance.
+            </p>
+          </div>
+          <a href="shop.html" class="btn-primary">Shop Now</a>
+        </div>
+      </section>
+
+      <!-- 3. Featured Products Section -->
+      <section class="collections">
+        <div class="container">
+          <h2>Explore Our Collections</h2>
+          <div class="category-grid">
+            <!-- Men's Category Card -->
+            <a href="shop-men.html" class="category-card">
+              <img
+                src="images/category-men.png"
+                alt="Shop Men's Fitness Apparel"
+              />
+              <div class="card-overlay">
+                <h3>Men</h3>
+              </div>
+            </a>
+
+            <!-- Women's Category Card -->
+            <a href="shop-women.html" class="category-card">
+              <img
+                src="images/category-women.png"
+                alt="Shop Women's Fitness Apparel"
+              />
+              <div class="card-overlay">
+                <h3>Women</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 4. Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Ashgrtz Fitness. All Rights Reserved.</p>
+        <!-- Add social media links here later -->
+      </div>
+    </footer>
+
+    <!-- Link to our JavaScript file -->
+    <script src="js/auth-status.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/transition.js"></script>
+  </body>
+</html>

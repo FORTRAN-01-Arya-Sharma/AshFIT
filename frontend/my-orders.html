@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - Ashgrtz Fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="fade-out">
+    <!-- 1. Navigation Bar -->
+    <header class="navbar">
+      <div class="container">
+        <a href="index.html" class="brand-logo"
+          ><img src="images/logo.png" alt="Ashgrtz Logo" /><span
+            >Ashgrtz</span
+          ></a
+        >
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="nav-action-item-mobile"><a href="cart.html">Cart</a></li>
+            <li class="nav-action-item-mobile" id="mobile-login-button">
+              <a href="login.html" class="btn-login">Login</a>
+            </li>
+            <li
+              class="nav-action-item-mobile"
+              id="mobile-user-profile"
+              style="display: none"
+            >
+              <div class="mobile-profile-container">
+                <div class="profile-pic" id="mobile-profile-pic-display"></div>
+                <a href="#" id="mobile-logout-button">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <div class="right-nav-container">
+          <div class="nav-actions" id="desktop-actions">
+            <a href="cart.html" id="cart-link">Cart</a>
+            <a href="login.html" class="btn-login" id="login-button">Login</a>
+            <div id="user-profile" style="display: none">
+              <a href="#" id="logout-button">Logout</a>
+              <label for="avatar-upload" class="profile-pic-label">
+                <div class="profile-pic" id="profile-pic-display"></div>
+              </label>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/png, image/jpeg"
+                style="display: none"
+              />
+            </div>
+          </div>
+          <div class="hamburger-menu" id="hamburger-menu">
+            <span class="bar"></span><span class="bar"></span
+            ><span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Main Content for the My Orders Page -->
+    <main class="account-page">
+      <div class="container">
+        <h1>My Account</h1>
+
+        <div class="account-layout">
+          <!-- Left Side: Navigation -->
+          <div class="account-nav">
+            <a href="account.html">Profile</a>
+            <!-- This is the fixed link -->
+            <a href="my-orders.html" class="active">My Orders</a>
+            <a href="#" id="account-logout-btn">Logout</a>
+          </div>
+
+          <!-- Right Side: Content -->
+          <div class="account-content">
+            <h2>My Order History</h2>
+            <p>
+              Here you can find the details of all the orders you have placed.
+            </p>
+            <div class="table-container">
+              <table id="orders-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody">
+                  <!-- Orders will be loaded here by JavaScript -->
+                  <tr>
+                    <td colspan="4">Loading your orders...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 3. Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Ashgrtz Fitness. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- 4. JavaScript Links -->
+    <script src="js/transition.js"></script>
+    <script src="js/auth-status.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/my-orders.js"></script>
+  </body>
+</html>

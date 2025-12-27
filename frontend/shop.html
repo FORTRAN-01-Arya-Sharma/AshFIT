@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop All Products - Ashgrtz Fitness</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="fade-out">
+    <!-- 1. Navigation Bar (Stays the same) -->
+    <header class="navbar">
+      <div class="container">
+        <!-- Item 1: Logo (Stays on the Left) -->
+        <a href="index.html" class="brand-logo">
+          <img src="images/logo.png" alt="Ashgrtz Logo" />
+          <span>Ashgrtz</span>
+        </a>
+
+        <!-- Item 2: Main Navigation (Center Links for Desktop, All Links for Mobile Panel) -->
+        <nav id="main-nav">
+          <ul>
+            <!-- These links appear in the center on desktop -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <!-- These links ONLY appear in the mobile slide-out menu -->
+            <li class="nav-action-item-mobile"><a href="cart.html">Cart</a></li>
+            <li class="nav-action-item-mobile" id="mobile-login-button">
+              <a href="login.html" class="btn-login">Login</a>
+            </li>
+            <li
+              class="nav-action-item-mobile"
+              id="mobile-user-profile"
+              style="display: none"
+            >
+              <div class="mobile-profile-container">
+                <div class="profile-pic" id="mobile-profile-pic-display"></div>
+                <a href="#" id="mobile-logout-button">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Item 3: Desktop Actions & Hamburger Menu Container -->
+        <div class="right-nav-container">
+          <!-- Desktop-Only Action Links -->
+          <div class="nav-actions" id="desktop-actions">
+            <a href="cart.html" id="cart-link">Cart</a>
+            <a href="login.html" class="btn-login" id="login-button">Login</a>
+            <div id="user-profile" style="display: none">
+              <a href="#" id="logout-button">Logout</a>
+              <a href="account.html" class="profile-pic-link">
+    <div class="profile-pic" id="profile-pic-display"></div>
+</a>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/png, image/jpeg"
+                style="display: none"
+              />
+            </div>
+          </div>
+
+          <!-- Mobile-Only Hamburger Icon -->
+          <div class="hamburger-menu" id="hamburger-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Main Content for the Shop Page -->
+    <main class="shop-page">
+      <div class="container">
+        <h1 class="page-title">All Products</h1>
+
+        <!-- This grid will be filled with products by our JavaScript -->
+        <div id="product-grid" class="product-grid">
+          <!-- Products will be dynamically loaded here... -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Structure for Product Details -->
+    <div id="product-modal" class="modal-overlay" style="display: none">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+        <div id="modal-product-detail"></div>
+      </div>
+    </div>
+
+    <!-- ADD THIS NEW MODAL for the Size Chart -->
+    <div id="size-chart-modal" class="modal-overlay" style="display: none">
+      <div class="modal-content size-chart-content">
+        <button class="modal-close" id="size-chart-modal-close-btn">
+          &times;
+        </button>
+        <h2>Size Chart</h2>
+        <img src="images/size-chart.png" alt="Sizing Chart" />
+      </div>
+    </div>
+
+    <!-- 3. Footer (Stays the same) -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Ashgrtz Fitness. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link to JavaScript files -->
+    <script src="js/main.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/auth-status.js"></script>
+    <script src="js/transition.js"></script>
+    <script src="js/shop-logic.js"></script>
+    
+  </body>
+</html>
