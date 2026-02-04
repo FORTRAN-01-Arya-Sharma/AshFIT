@@ -6,8 +6,10 @@ const userRoutes = require('./routes/userRoutes'); // <-- 1. IMPORT new routes
 const messageRoutes = require('./routes/messageRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const app = express();
+
 const reviewRoutes = require('./routes/reviewRoutes');
+const cors = require('cors'); 
+const app = express();
 
 // --- MIDDLEWARE ---
 app.use(cors());
