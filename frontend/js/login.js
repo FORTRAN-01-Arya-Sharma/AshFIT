@@ -1,4 +1,4 @@
-// This is the complete code for frontend/js/login.js
+// This is the complete and final code for frontend/js/login.js
 
 document.addEventListener("DOMContentLoaded", () => {
   // Select the form and the message area
@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Send the data to the backend API
     try {
-      const response = await fetch("http://localhost:3000/api/users/login", {
+      // UPDATED: Now points to your live Render backend
+      const response = await fetch("https://ashfit.onrender.com/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formMessage.textContent = "Login successful! Redirecting...";
         formMessage.classList.add("success");
 
+        // Short delay before moving to home page so user sees the success message
         setTimeout(() => {
           window.location.href = "index.html";
         }, 1500);

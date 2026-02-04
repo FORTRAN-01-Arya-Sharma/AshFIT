@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/users/upload-avatar",
+                    "https://ashfit.onrender.com/api/users/upload-avatar",
                     {
                         method: "POST",
                         headers: { "x-auth-token": token },
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             // --- FETCH USER and ORDERS DATA IN PARALLEL ---
             const [userResponse, ordersResponse] = await Promise.all([
-                fetch('http://localhost:3000/api/users/me', { headers: { 'x-auth-token': token }, cache: 'no-cache' }),
-                fetch('http://localhost:3000/api/orders/myorders', { headers: { 'x-auth-token': token }, cache: 'no-cache' })
+                fetch('https://ashfit.onrender.com/api/users/me', { headers: { 'x-auth-token': token }, cache: 'no-cache' }),
+                fetch('https://ashfit.onrender.com/api/orders/myorders', { headers: { 'x-auth-token': token }, cache: 'no-cache' })
             ]);
 
             if (!userResponse.ok || !ordersResponse.ok) {
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             
             const imageUrl = user.profile_image_url 
-                ? `http://localhost:3000/${user.profile_image_url}` 
+                ? `https://ashfit.onrender.com/${user.profile_image_url}` 
                 : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2300ff99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
 
             // --- RENDER HTML ---

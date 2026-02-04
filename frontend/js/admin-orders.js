@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchOrders() {
     try {
-      const response = await fetch("http://localhost:3000/api/admin/orders", {
+      const response = await fetch("https://ashfit.onrender.com/api/admin/orders", {
         headers: {
           "x-auth-token": token,
         },
@@ -70,7 +70,7 @@ ordersTbody.addEventListener('change', async (event) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/orders/${orderId}/status`, {
+            const response = await fetch(`https://ashfit.onrender.com/api/admin/orders/${orderId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

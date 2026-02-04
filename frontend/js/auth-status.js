@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Load profile picture if it exists
             if (userData.profile_image_url) {
-                const imageUrl = `http://localhost:3000/${userData.profile_image_url}`;
+                const imageUrl = `https://ashfit.onrender.com/${userData.profile_image_url}`;
                 // Set for both desktop and mobile pics
                 profilePicDisplay.style.backgroundImage = `url('${imageUrl}')`;
                 profilePicDisplay.style.backgroundSize = 'cover';
@@ -47,21 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 2. LOGOUT LOGIC ---
-    
-    
     // --- 3. AVATAR UPLOAD LOGIC ---
-    // (This part stays exactly the same, no changes needed here)
     const avatarUploadInput = document.getElementById('avatar-upload');
     if (avatarUploadInput) {
         avatarUploadInput.addEventListener('change', async (event) => {
-            // ... (keep all the existing upload logic)
             const file = event.target.files[0];
             if (!file || !token) { return; }
             const formData = new FormData();
             formData.append('avatar', file);
             try {
-                const response = await fetch('http://localhost:3000/api/users/upload-avatar', {
+                const response = await fetch('https://ashfit.onrender.com/api/users/upload-avatar', {
                     method: 'POST',
                     headers: { 'x-auth-token': token },
                     body: formData,
@@ -72,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         userData.profile_image_url = result.profile_image_url;
                         localStorage.setItem('userData', JSON.stringify(userData));
                     }
-                    // updateAuthUI(); // Re-run the UI update to show the new picture
                     alert(result.message);
                 } else {
                     alert(`Upload failed: ${result.message}`);
@@ -84,10 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-
     // --- 4. INITIALIZATION ---
-    updateAuthUI(); // Run the function once on page load
+    updateAuthUI(); 
 
     function logout() {
         localStorage.removeItem('authToken');

@@ -1,4 +1,4 @@
-// This is the complete code for frontend/js/register.js
+// This is the complete and final code for frontend/js/register.js
 
 document.addEventListener('DOMContentLoaded', () => {
     // Select the form and the message area
@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Send the data to the backend API
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            // UPDATED: Now points to your live Render backend
+            const response = await fetch('https://ashfit.onrender.com/api/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.textContent = result.message;
                 formMessage.classList.add('success');
                 
-                // Optional: Redirect to login page after a short delay
+                // Redirect to login page after a short delay so user sees the success message
                 setTimeout(() => {
                     window.location.href = 'login.html';
                 }, 2000); // 2-second delay
                 
             } else {
-                // Error
+                // Error (e.g., email already exists or validation failed)
                 formMessage.textContent = result.message || 'An error occurred. Please try again.';
                 formMessage.classList.add('error');
             }

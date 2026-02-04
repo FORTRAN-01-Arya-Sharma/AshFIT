@@ -1,5 +1,3 @@
-// This is the final and correct version of checkout.js with validation
-
 document.addEventListener("DOMContentLoaded", () => {
   // --- ELEMENT SELECTORS ---
   const shippingForm = document.getElementById("shipping-form");
@@ -31,27 +29,22 @@ document.addEventListener("DOMContentLoaded", () => {
   function validateShippingForm() {
     let isFormValid = true;
     inputs.forEach((input) => {
-      // Run validation on each input and track if any are invalid
       if (!validateInput(input)) {
         isFormValid = false;
       }
     });
-    // Enable or disable the button based on the overall form validity
     shippingSubmitBtn.disabled = !isFormValid;
   }
 
   function validateInput(input) {
-    const errorSpan = input.nextElementSibling; // The <span> right after the <input>
+    const errorSpan = input.nextElementSibling; 
     let isValid = true;
     let errorMessage = "";
 
-    // Rule 1: Field must not be empty
     if (input.value.trim() === "") {
       isValid = false;
-      // Get the label text for a dynamic error message
       errorMessage = `${input.previousElementSibling.textContent} is required.`;
     }
-    // Rule 2 (Example): ZIP code must be at least 5 digits
     else if (input.id === "zip" && !/^\d{5,}$/.test(input.value)) {
       isValid = false;
       errorMessage = "Please enter a valid ZIP code (at least 5 digits).";
@@ -73,12 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return isValid;
   }
 
-  // Add event listeners to each input for real-time feedback
   inputs.forEach((input) => {
     input.addEventListener("input", () => validateShippingForm());
   });
 
-  // --- NAVIGATION & SUBMIT LOGIC ---
   function goToStep(stepNumber) {
     Object.values(steps).forEach((step) => (step.style.display = "none"));
     Object.values(stepIndicators).forEach((indicator) =>
@@ -117,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   placeOrderBtn.addEventListener("click", async () => {
-    // ... (This part is correct from the previous step)
     const cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
     const token = localStorage.getItem("authToken");
     if (cart.length === 0 || !token) {
@@ -130,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       totalPrice: parseFloat(summaryTotal.textContent.replace("$", "")),
     };
     try {
-      const response = await fetch("http://localhost:3000/api/orders/create", {
+      const response = await fetch("https://ashfit.onrender.com/api/orders/create", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify(orderData),
@@ -148,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- INITIALIZATION ---
   async function renderSummary() {
     const cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
     if (
@@ -164,9 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
     summaryItems.innerHTML = "";
 
     for (const item of cart) {
-      const product = await (
-        await fetch(`http://localhost:3000/api/products/${item.id}`)
-      ).json();
+      const response = await fetch(`https://ashfit.onrender.com/api/products/${item.id}`);
+      const product = await response.json();
       if (product) {
         subtotal += product.price * item.quantity;
         summaryItems.innerHTML += `<div class="summary-item"><span class="item-name">${
@@ -179,8 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     summaryTotal.textContent = `$${subtotal.toFixed(2)}`;
   }
 
-  // Run all initialization functions
   renderSummary();
-  validateShippingForm(); // Initialize the button state on page load
+  validateShippingForm(); 
   goToStep(1);
 });

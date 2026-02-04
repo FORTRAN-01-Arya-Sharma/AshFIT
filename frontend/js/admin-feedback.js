@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- FETCH ALL CONTACT MESSAGES ---
     async function fetchMessages() {
         try {
-            const response = await fetch('http://localhost:3000/api/admin/messages', {
+            const response = await fetch('https://ashfit.onrender.com/api/admin/messages', {
                 headers: { 'x-auth-token': token }
             });
             if (!response.ok) throw new Error('Could not fetch messages.');
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- FETCH ALL PRODUCT REVIEWS ---
     async function fetchReviews() {
         try {
-            const response = await fetch('http://localhost:3000/api/admin/reviews', {
+            const response = await fetch('https://ashfit.onrender.com/api/admin/reviews', {
                 headers: { 'x-auth-token': token }
             });
             if (!response.ok) throw new Error('Could not fetch reviews.');

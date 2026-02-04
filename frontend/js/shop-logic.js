@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- API & DISPLAY LOGIC ---
     async function initializeShop() {
-        let apiUrl = 'http://localhost:3000/api/products';
+        // UPDATED: Points to live Render backend
+        let apiUrl = 'https://ashfit.onrender.com/api/products';
         if (category) {
             apiUrl += `/category/${category}`;
         }
@@ -37,7 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     async function fetchSingleProduct(productId) {
         try {
-            const response = await fetch(`http://localhost:3000/api/products/${productId}`);
+            // UPDATED: Points to live Render backend
+            const response = await fetch(`https://ashfit.onrender.com/api/products/${productId}`);
             if (!response.ok) throw new Error("Product not found");
             const product = await response.json();
             displayProductInModal(product);
@@ -52,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!reviewsList) return;
         reviewsList.innerHTML = '<p>Loading reviews...</p>';
         try {
-            const response = await fetch(`http://localhost:3000/api/reviews/${productId}`);
+            // UPDATED: Points to live Render backend
+            const response = await fetch(`https://ashfit.onrender.com/api/reviews/${productId}`);
             const reviews = await response.json();
             renderReviews(reviews);
         } catch (error) {
@@ -208,7 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!data.rating) { alert('Please select a star rating.'); return; }
 
                 try {
-                    const response = await fetch(`http://localhost:3000/api/reviews/${productId}`, {
+                    // UPDATED: Points to live Render backend
+                    const response = await fetch(`https://ashfit.onrender.com/api/reviews/${productId}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
                         body: JSON.stringify(data)

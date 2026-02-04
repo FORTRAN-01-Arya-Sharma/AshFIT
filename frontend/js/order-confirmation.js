@@ -1,10 +1,10 @@
-// This is the complete code for frontend/js/order-confirmation.js
+// This is the complete and final code for frontend/js/order-confirmation.js
 
 document.addEventListener('DOMContentLoaded', async () => {
     const confirmationContent = document.getElementById('confirmation-content');
     const token = localStorage.getItem('authToken');
 
-    // 1. Get the orderId from the URL
+    // 1. Get the orderId from the URL (e.g., ?orderId=123)
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('orderId');
 
@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        // 2. Fetch the order details from the new backend endpoint
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+        // 2. Fetch the order details from the live backend endpoint
+        // UPDATED: Now points to your live Render backend
+        const response = await fetch(`https://ashfit.onrender.com/api/orders/${orderId}`, {
             headers: {
                 'x-auth-token': token
             }

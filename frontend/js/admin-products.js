@@ -1,5 +1,3 @@
-// This is the complete and final code for frontend/js/admin-products.js
-
 document.addEventListener("DOMContentLoaded", () => {
   // --- ELEMENT SELECTORS ---
   const token = localStorage.getItem("authToken");
@@ -13,10 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 1. FETCH & DISPLAY LOGIC ---
 
-  // Fetches all products from the public API
   async function fetchProducts() {
     try {
-      const response = await fetch("http://localhost:3000/api/products");
+      const response = await fetch("https://ashfit.onrender.com/api/products");
       if (!response.ok) throw new Error("Failed to fetch products");
       const products = await response.json();
       renderProducts(products);
@@ -26,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Renders the list of products into the table
   function renderProducts(products) {
     productsTbody.innerHTML = "";
     products.forEach((product) => {
@@ -47,13 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- 2. MODAL & FORM LOGIC ---
-
-  // Opens the modal. If a product object is passed, it fills the form for editing.
   function openModal(product = null) {
-    productForm.reset(); // Clear any old data
+    productForm.reset(); 
     if (product) {
-      // EDIT MODE
       modalTitle.textContent = "Edit Product";
       productIdInput.value = product.id;
       document.getElementById("name").value = product.name;
@@ -63,60 +55,51 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("image_url").value = product.image_url;
       document.getElementById("description").value = product.description;
     } else {
-      // ADD NEW MODE
       modalTitle.textContent = "Add New Product";
-      productIdInput.value = ""; // Ensure the hidden ID is empty
+      productIdInput.value = ""; 
     }
     modal.style.display = "flex";
     setTimeout(() => modal.classList.add("active"), 10);
   }
 
-  // Closes the modal
   function closeModal() {
     modal.classList.remove("active");
     setTimeout(() => (modal.style.display = "none"), 300);
   }
 
-  // --- 3. EVENT LISTENERS ---
-
-  // Open modal to add a new product
   addProductBtn.addEventListener("click", () => openModal());
-
-  // Close modal with 'X' button or by clicking the background
   modalCloseBtn.addEventListener("click", closeModal);
   modal.addEventListener("click", (event) => {
     if (event.target === modal) closeModal();
   });
 
-  // Handle the form submission for both creating and updating
   productForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(productForm);
     const data = Object.fromEntries(formData.entries());
     const productId = data.productId;
 
-    // Determine if this is a new product (POST) or an update (PUT)
     const method = productId ? "PUT" : "POST";
     const url = productId
-      ? `http://localhost:3000/api/admin/products/${productId}`
-      : "http://localhost:3000/api/admin/products";
+      ? `https://ashfit.onrender.com/api/admin/products/${productId}`
+      : "https://ashfit.onrender.com/api/admin/products";
 
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token, // Send the admin's auth token
+          "x-auth-token": token,
         },
         body: JSON.stringify(data),
       });
 
       const result = await response.json();
-      alert(result.message); // Show success/error message from backend
+      alert(result.message);
 
       if (response.ok) {
         closeModal();
-        fetchProducts(); // Refresh the product list
+        fetchProducts(); 
       }
     } catch (error) {
       console.error("Failed to save product:", error);
@@ -124,37 +107,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Handle clicks on the 'Edit' and 'Delete' buttons in the table
   productsTbody.addEventListener("click", async (event) => {
     const target = event.target;
     const id = target.dataset.id;
 
-    // --- EDIT LOGIC ---
     if (target.classList.contains("edit-btn")) {
-      // Fetch the full details for this one product
-      const response = await fetch(`http://localhost:3000/api/products/${id}`);
+      const response = await fetch(`https://ashfit.onrender.com/api/products/${id}`);
       const product = await response.json();
-      // Open the modal and pre-fill it with this product's data
       openModal(product);
     }
 
-    // --- DELETE LOGIC ---
     if (target.classList.contains("delete-btn")) {
-      if (
-        confirm("Are you sure you want to permanently delete this product?")
-      ) {
+      if (confirm("Are you sure you want to permanently delete this product?")) {
         try {
           const response = await fetch(
-            `http://localhost:3000/api/admin/products/${id}`,
+            `https://ashfit.onrender.com/api/admin/products/${id}`,
             {
               method: "DELETE",
-              headers: { "x-auth-token": token }, // Prove we are an admin
+              headers: { "x-auth-token": token }, 
             }
           );
           const result = await response.json();
           alert(result.message);
           if (response.ok) {
-            fetchProducts(); // Refresh the product list
+            fetchProducts(); 
           }
         } catch (error) {
           alert("Error deleting product.");
@@ -163,7 +139,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- 4. INITIALIZATION ---
-  // Fetch and display all products when the page first loads
   fetchProducts();
 });

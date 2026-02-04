@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return; 
     }
 
-    // --- LOGOUT LOGIC (This part was missing) ---
+    // --- LOGOUT LOGIC ---
     if(logoutBtn) {
         logoutBtn.addEventListener('click', (e) => { 
             e.preventDefault();
@@ -24,9 +24,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- FETCH AND DISPLAY ORDERS ---
     try {
-        const response = await fetch('http://localhost:3000/api/orders/myorders', {
+        // UPDATED: Points to your live Render backend
+        const response = await fetch('https://ashfit.onrender.com/api/orders/myorders', {
             headers: { 'x-auth-token': token }
         });
+        
         if (!response.ok) throw new Error('Could not fetch orders.');
 
         const orders = await response.json();
@@ -37,7 +39,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             ordersTbody.innerHTML = '';
             orders.forEach(order => {
                 const row = document.createElement('tr');
-                const orderDate = new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                const orderDate = new Date(order.created_at).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
                 row.innerHTML = `
                     <td data-label="Order ID">#${order.id}</td>
                     <td data-label="Date">${orderDate}</td>

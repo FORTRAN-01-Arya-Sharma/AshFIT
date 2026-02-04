@@ -1,4 +1,4 @@
-// This is the complete code for frontend/js/contact.js
+// This is the complete and final code for frontend/js/contact.js
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const submitButton = contactForm.querySelector('button[type="submit"]');
@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch('http://localhost:3000/api/messages/contact', {
+            // UPDATED: Now points to your live Render backend
+            const response = await fetch('https://ashfit.onrender.com/api/messages/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
