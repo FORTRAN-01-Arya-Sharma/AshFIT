@@ -8,7 +8,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 const reviewRoutes = require('./routes/reviewRoutes');
-const cors = require('cors'); 
+
 const app = express();
 
 // --- MIDDLEWARE ---
